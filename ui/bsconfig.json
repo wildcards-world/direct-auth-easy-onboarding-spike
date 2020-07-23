@@ -1,0 +1,45 @@
+{
+  "name": "examples",
+  "graphql": {
+    "extend-mutation": "ApolloClient.GraphQL_PPX.ExtendMutation",
+    "extend-query": "ApolloClient.GraphQL_PPX.ExtendQuery",
+    "extend-subscription": "ApolloClient.GraphQL_PPX.ExtendSubscription"
+  },
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "ppx-flags": [
+    [
+      "@reasonml-community/graphql-ppx/ppx",
+      "-template-tag=ApolloClient.GraphQL_PPX.templateTagReturnType",
+      "-template-tag-import=gql",
+      "-template-tag-location=@apollo/client"
+    ],
+    "bs-log/ppx"
+  ],
+  "reason": {
+    "react-jsx": 3
+  },
+  "refmt": 3,
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "reason-apollo-client",
+    "@reasonml-community/graphql-ppx",
+    "@yawaramin/prometo",
+    "reason-promise",
+    "reason-react",
+    "bs-log",
+    "bs-css",
+    "bs-css-emotion",
+    "re-classnames"
+  ]
+}
