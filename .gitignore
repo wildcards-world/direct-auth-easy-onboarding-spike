@@ -1,0 +1,7 @@
+config/*
+!config/config.json
+yarn-error.log
+node_modules
+# .env
+
+.DS_Store
