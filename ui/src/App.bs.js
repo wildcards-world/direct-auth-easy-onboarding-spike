@@ -2,38 +2,52 @@
 
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
+import * as DirectAuth from "./DirectAuth.bs.js";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
 
-var getTorus = (() => {
-    return require("./directauth.js").createTorusSdk();
-  });
+function App$LoggedInPage(Props) {
+  var privateKey = Props.privateKey;
+  var ethAddress = Props.ethAddress;
+  var testFunc = ((privKey) => {
+        const lib = require("./initPrivateKeyAandSignExample.js").exampleCode;
+        lib(privKey);
+      });
+  testFunc(privateKey);
+  return React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, "You are logged in!"), React.createElement("p", undefined, ethAddress), React.createElement("p", undefined, privateKey));
+}
+
+var LoggedInPage = {
+  make: App$LoggedInPage
+};
 
 function App$AuthPage(Props) {
   var torusObj = Props.torusObj;
-  console.log(torusObj);
   var match = React.useState(function () {
         
       });
   var setYourEthAddress = match[1];
   var yourEthAddress = match[0];
-  var torusLogin = ((torusObj) => {
-        return torusObj.triggerLogin({
+  var onClick = function (param) {
+    var __x = torusObj.triggerLogin({
           name: "Google",
           typeOfLogin: "google",
           clientId: "221898609709-obfn3p63741l5333093430j3qeiinaa8.apps.googleusercontent.com",
-          verifier: "google-lrc",
+          verifier: "google-lrc"
         });
-      });
-  var onClick = function (param) {
-    var __x = torusLogin(torusObj);
     __x.then(function (loginObj) {
           return Promise.resolve(Curry._1(setYourEthAddress, (function (param) {
-                            return loginObj.publicAddress;
+                            return [
+                                    loginObj.publicAddress,
+                                    loginObj.privateKey
+                                  ];
                           })));
         });
     
   };
-  return React.createElement("div", undefined, yourEthAddress !== undefined ? React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, "You are logged in!"), React.createElement("p", undefined, yourEthAddress)) : React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, "Login With DirectAuth"), React.createElement("button", {
+  return React.createElement("div", undefined, yourEthAddress !== undefined ? React.createElement(App$LoggedInPage, {
+                    privateKey: yourEthAddress[1],
+                    ethAddress: yourEthAddress[0]
+                  }) : React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, "Login With DirectAuth"), React.createElement("button", {
                         onClick: onClick
                       }, "Google Login")));
 }
@@ -49,7 +63,7 @@ function App(Props) {
   var setTorusInstance = match[1];
   var torusInstance = match[0];
   React.useEffect((function () {
-          var __x = Curry._1(getTorus, undefined);
+          var __x = DirectAuth.createTorusSdk(undefined);
           __x.then(function (torusInstance) {
                 return Promise.resolve(Curry._1(setTorusInstance, (function (param) {
                                   return Caml_option.some(torusInstance);
@@ -69,7 +83,7 @@ function App(Props) {
 var make = App;
 
 export {
-  getTorus ,
+  LoggedInPage ,
   AuthPage ,
   make ,
   

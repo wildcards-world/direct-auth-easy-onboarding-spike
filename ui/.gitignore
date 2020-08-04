@@ -25,3 +25,5 @@ yarn-error.log*
 # bucklescript stuff
 .merlin
 lib/bs
+*.bs.js
+.bsb.lock
