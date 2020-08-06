@@ -3,13 +3,13 @@ module LoggedInPage = {
   let make = (~privateKey, ~ethAddress) => {
     let testFunc = [%raw
       {|
-      (privKey) => {
+      (privKey, publicKey) => {
         const lib = require("./initPrivateKeyAandSignExample.js").exampleCode;
-        lib(privKey);
+        lib(privKey, publicKey);
       }
     |}
     ];
-    testFunc(privateKey);
+    testFunc(privateKey, ethAddress);
     <>
       <h1> "You are logged in!"->React.string </h1>
       <p> ethAddress->React.string </p>
@@ -75,10 +75,10 @@ let make = () => {
     ->ignore;
     None;
   });
-  switch (torusInstance) {
-  | None => <h1> "Loading"->React.string </h1>
-  | Some(torusObj) =>
-    // Js.log(torusInstance);
-    <AuthPage torusObj />
-  };
+  <ApolloClient.React.ApolloProvider client=Client.instance>
+    {switch (torusInstance) {
+     | None => <h1> "Loading"->React.string </h1>
+     | Some(torusObj) => <AuthPage torusObj />
+     }}
+  </ApolloClient.React.ApolloProvider>;
 };

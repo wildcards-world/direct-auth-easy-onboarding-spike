@@ -3,7 +3,7 @@ const Web3 = require("web3");
 
 // take in private key
 // create an ethereum privider with the private key (and infura)
-export const exampleCode = (privateKey) => {
+export const exampleCode = async (privateKey, publicKey) => {
   var provider = new PrivateKeyProvider(
     privateKey,
     "https://rinkeby.infura.io/v3/c401b8ee3a324619a453f2b5b2122d7a"
@@ -12,15 +12,14 @@ export const exampleCode = (privateKey) => {
   let web3 = new Web3(provider);
 
   web3.eth.getAccounts(console.log);
+
+  const message = "signin-string-for-wildcards:" + publicKey;
+
+  const signature = await web3.eth.personal.sign(message, publicKey);
+
+  console.log(signature);
+
+  // var recover_2 = web3.eth.accounts.recover(message, signature);
+  // console.log("recover 2 :", recover_2);
+  return signature;
 };
-/**
- {"type":"http-log","timestamp":"2020-08-04T18:48:38.406+0000","level":"info","detail":{"operation":{"query_execution_time":1.0728623e-2,"user_vars":{"x-hasura-role":"admin"},"request_id":"96311e2e-2ca2-4772-8b65-ec160c47f24a","response_size":68,"request_read_time":5.565e-6},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1/query","ip":"172.23.0.1","method":"POST","content_encoding":"gzip"}}}
-{"type":"http-log","timestamp":"2020-08-04T18:48:38.406+0000","level":"info","detail":{"operation":{"query_execution_time":0.195509242,"user_vars":{"x-hasura-role":"admin"},"request_id":"0e6b7672-10cd-48bd-8aa4-a234b18ea774","response_size":3917,"request_read_time":1.4846e-5},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1/query","ip":"172.23.0.1","method":"POST","content_encoding":"gzip"}}}
-{"type":"http-log","timestamp":"2020-08-04T18:48:38.406+0000","level":"info","detail":{"operation":{"query_execution_time":1.0122e-4,"user_vars":{"x-hasura-role":"admin"},"request_id":"0483e3ff-f978-4d05-8954-8e1367304c83","response_size":60,"request_read_time":1.048e-5},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1/query","ip":"172.23.0.1","method":"POST","content_encoding":"gzip"}}}
-{"type":"http-log","timestamp":"2020-08-04T18:48:38.406+0000","level":"info","detail":{"operation":{"query_execution_time":1.041099e-2,"user_vars":{"x-hasura-role":"admin"},"request_id":"db5a872b-0970-482d-bedc-e312dba74008","response_size":496,"request_read_time":4.538e-6},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1/query","ip":"172.23.0.1","method":"POST","content_encoding":"gzip"}}}
-{"type":"http-log","timestamp":"2020-08-04T18:48:38.406+0000","level":"info","detail":{"operation":{"query_execution_time":8.7535e-5,"user_vars":{"x-hasura-role":"admin"},"request_id":"3506ad85-4f7d-4131-940c-cbfff93f8d62","response_size":60,"request_read_time":8.604e-6},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1/query","ip":"172.23.0.1","method":"POST","content_encoding":"gzip"}}}
-{"type":"http-log","timestamp":"2020-08-04T18:48:41.636+0000","level":"info","detail":{"operation":{"query_execution_time":1.6208e-5,"user_vars":{"x-hasura-role":"admin"},"request_id":"17f90577-e639-4c9d-bb1d-54df25fd47f8","response_size":165,"request_read_time":5.503e-6},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1alpha1/config","ip":"172.23.0.1","method":"GET","content_encoding":"gzip"}}}
-{"type":"webhook-log","timestamp":"2020-08-04T18:48:41.636+0000","level":"error","detail":{"response":"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot POST /auth</pre>\n</body>\n</html>\n","url":"http://hasura-actions:9898/auth","method":"POST","http_error":null,"message":null,"status_code":404}}
-{"type":"http-log","timestamp":"2020-08-04T18:48:41.636+0000","level":"error","detail":{"operation":{"error":{"path":"$","error":"Invalid response from authorization hook","code":"unexpected"},"request_id":"ae728a46-fd44-488c-a99d-3f271e7e0b4d","response_size":83,"raw_query":"{\"query\":\"\\n    query IntrospectionQuery {\\n      __schema {\\n        queryType { name }\\n        mutationType { name }\\n        subscriptionType { name }\\n        types {\\n          ...FullType\\n        }\\n        directives {\\n          name\\n          description\\n          locations\\n          args {\\n            ...InputValue\\n          }\\n        }\\n      }\\n    }\\n\\n    fragment FullType on __Type {\\n      kind\\n      name\\n      description\\n      fields(includeDeprecated: true) {\\n        name\\n        description\\n        args {\\n          ...InputValue\\n        }\\n        type {\\n          ...TypeRef\\n        }\\n        isDeprecated\\n        deprecationReason\\n      }\\n      inputFields {\\n        ...InputValue\\n      }\\n      interfaces {\\n        ...TypeRef\\n      }\\n      enumValues(includeDeprecated: true) {\\n        name\\n        description\\n        isDeprecated\\n        deprecationReason\\n      }\\n      possibleTypes {\\n        ...TypeRef\\n      }\\n    }\\n\\n    fragment InputValue on __InputValue {\\n      name\\n      description\\n      type { ...TypeRef }\\n      defaultValue\\n    }\\n\\n    fragment TypeRef on __Type {\\n      kind\\n      name\\n      ofType {\\n        kind\\n        name\\n        ofType {\\n          kind\\n          name\\n          ofType {\\n            kind\\n            name\\n            ofType {\\n              kind\\n              name\\n              ofType {\\n                kind\\n                name\\n                ofType {\\n                  kind\\n                  name\\n                  ofType {\\n                    kind\\n                    name\\n                  }\\n                }\\n              }\\n            }\\n          }\\n        }\\n      }\\n    }\\n  \"}"},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1/graphql","ip":"172.23.0.1","method":"POST","content_encoding":null}}}
-// {"type":"http-log","timestamp":"2020-08-04T18:48:44.379+0000","level":"info","detail":{"operation":{"query_execution_time":7.1175e-5,"user_vars":{"x-hasura-role":"admin"},"request_id":"f21dca88-206c-420b-9a0f-ae7a1cea15d1","response_size":60,"request_read_time":6.646e-6},"http_info":{"status":200,"http_version":"HTTP/1.1","url":"/v1/query","ip":"172.23.0.1","method":"POST","content_encoding":"gzip"}}}
- */

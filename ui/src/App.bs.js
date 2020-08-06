@@ -2,17 +2,19 @@
 
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
+import * as Client from "./gql-client/Client.bs.js";
 import * as DirectAuth from "./DirectAuth.bs.js";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
+import * as Client$1 from "@apollo/client";
 
 function App$LoggedInPage(Props) {
   var privateKey = Props.privateKey;
   var ethAddress = Props.ethAddress;
-  var testFunc = ((privKey) => {
+  var testFunc = ((privKey, publicKey) => {
         const lib = require("./initPrivateKeyAandSignExample.js").exampleCode;
-        lib(privKey);
+        lib(privKey, publicKey);
       });
-  testFunc(privateKey);
+  testFunc(privateKey, ethAddress);
   return React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, "You are logged in!"), React.createElement("p", undefined, ethAddress), React.createElement("p", undefined, privateKey));
 }
 
@@ -71,13 +73,12 @@ function App(Props) {
               });
           
         }), []);
-  if (torusInstance !== undefined) {
-    return React.createElement(App$AuthPage, {
-                torusObj: Caml_option.valFromOption(torusInstance)
-              });
-  } else {
-    return React.createElement("h1", undefined, "Loading");
-  }
+  return React.createElement(Client$1.ApolloProvider, {
+              client: Client.instance,
+              children: torusInstance !== undefined ? React.createElement(App$AuthPage, {
+                      torusObj: Caml_option.valFromOption(torusInstance)
+                    }) : React.createElement("h1", undefined, "Loading")
+            });
 }
 
 var make = App;
