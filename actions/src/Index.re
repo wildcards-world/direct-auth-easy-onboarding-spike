@@ -12,10 +12,10 @@ module Auth = {
     xHasuraUserId: string,
     [@bs.as "X-Hasura-Role"]
     xHasuraRole: string,
-    [@bs.as "X-Hasura-Is-Owner"]
-    xHasuraIsOwner: string,
-    [@bs.as "X-Hasura-Custom"]
-    xHasuraCustom: string,
+    // [@bs.as "X-Hasura-Is-Owner"]
+    // xHasuraIsOwner: string,
+    // [@bs.as "X-Hasura-Custom"]
+    // xHasuraCustom: string,
   };
   type headers = {
     [@bs.as "eth-signature"]
@@ -26,7 +26,14 @@ module Auth = {
   type authInput = {headers};
 
   let validateEthSignature = (ethSignature, ethAddress) => {
-    true;
+    let web3 = Web3.make();
+    let result =
+      Web3.ecRecover(
+        web3,
+        "signin-string-for-wildcards:" ++ ethAddress,
+        ethSignature,
+      );
+    result == ethAddress;
   };
 
   // NOT typesafe, but there is a level of trust from hasura :)
@@ -44,12 +51,7 @@ module Auth = {
         let {headers: {ethSignature, ethAddress}} = getAuthHeaders(req.req);
 
         if (validateEthSignature(ethSignature, ethAddress)) {
-          {
-            xHasuraUserId: "something",
-            xHasuraRole: "something",
-            xHasuraIsOwner: "something",
-            xHasuraCustom: "something",
-          }
+          {xHasuraUserId: ethAddress, xHasuraRole: "organisation"}
           ->authResponseToJson
           ->OkJson
           ->async;

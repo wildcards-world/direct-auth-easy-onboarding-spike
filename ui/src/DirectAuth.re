@@ -9,11 +9,19 @@ type constructorParams = {
 
 type initParams = {skipSw: bool};
 
+type jwtParams = {
+  domain: string,
+  verifierIdField: string,
+  connection: string,
+  isVerifierIdCaseSensitive: bool,
+};
+
 type loginParams = {
   name: string,
   typeOfLogin: string,
   clientId: string,
   verifier: string,
+  jwtParams: option(jwtParams),
 };
 
 type userInfo = {
@@ -36,13 +44,13 @@ type loginObj = {
 [@bs.module "@toruslabs/torus-direct-web-sdk"] [@bs.new]
 external make: constructorParams => t = "default";
 
-let da =
-  make({
-    baseUrl: "http://localhost:3000/serviceworker/",
-    enableLogging: true,
-    proxyContractAddress: "0x4023d2a0D330bF11426B12C6144Cfb96B7fa6183", // details for test net
-    network: "ropsten" // details for test net
-  });
+// let da =
+//   make({
+//     baseUrl: "http://localhost:3000/serviceworker/",
+//     enableLogging: true,
+//     proxyContractAddress: "0x4023d2a0D330bF11426B12C6144Cfb96B7fa6183", // details for test net
+//     network: "ropsten" // details for test net
+//   });
 
 [@bs.send] external init: (t, initParams) => Js.Promise.t(unit) = "init";
 

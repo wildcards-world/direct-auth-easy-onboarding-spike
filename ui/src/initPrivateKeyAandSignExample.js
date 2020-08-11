@@ -6,7 +6,7 @@ const Web3 = require("web3");
 export const exampleCode = async (privateKey, publicKey) => {
   var provider = new PrivateKeyProvider(
     privateKey,
-    "https://rinkeby.infura.io/v3/c401b8ee3a324619a453f2b5b2122d7a"
+    "wss://mainnet.infura.io/ws/v3/e8fe0574d5124106b82126c48b689bd9"
   );
 
   let web3 = new Web3(provider);

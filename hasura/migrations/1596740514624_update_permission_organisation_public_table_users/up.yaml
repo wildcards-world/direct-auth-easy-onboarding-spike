@@ -1,0 +1,17 @@
+- args:
+    permission:
+      allow_aggregations: false
+      backend_only: false
+      columns:
+      - ethAddress
+      - name
+      computed_fields: []
+      filter:
+        ethAddress:
+          _eq: X-Hasura-User-Id
+      limit: null
+    role: organisation
+    table:
+      name: users
+      schema: public
+  type: create_select_permission

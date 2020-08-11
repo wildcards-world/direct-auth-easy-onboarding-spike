@@ -28,18 +28,36 @@ module AuthPage = {
         triggerLogin(
           torusObj,
           {
-            name: "Google",
-            typeOfLogin: "google",
-            clientId: "221898609709-obfn3p63741l5333093430j3qeiinaa8.apps.googleusercontent.com",
-            verifier: "google-lrc",
+            name: "Hosted Email Passwordless",
+            typeOfLogin: "jwt",
+            // clientId: "VolHqir3FLzGjvtgtgJJ1H25vHGj9uMq",
+            clientId: "P7PJuBCXIHP41lcyty0NEb7Lgf7Zme8Q",
+            // clientId: "lXlMA51Cpf63nU7IOA4kbCYR7E0a3cIB",
+            verifier: "torus-auth0-passwordless",
+            jwtParams:
+              Some({
+                // domain: "https://jasoons.eu.auth0.com",
+                domain: "https://torus-test.auth0.com",
+                // domain: "https://dev-q6kst0rx.eu.auth0.com",
+                verifierIdField: "name",
+                connection: "",
+                isVerifierIdCaseSensitive: false,
+              }),
           },
+          // {
+          //   name: "Google",
+          //   typeOfLogin: "google",
+          //   clientId: "221898609709-obfn3p63741l5333093430j3qeiinaa8.apps.googleusercontent.com",
+          //   verifier: "google-lrc",
+          // },
         )
         ->Js.Promise.then_(
             loginObj => {
+              Js.log2("THE LOGIN OBJECT", loginObj);
               setYourEthAddress(_ =>
                 Some((loginObj.publicAddress, loginObj.privateKey))
               )
-              ->Js.Promise.resolve
+              ->Js.Promise.resolve;
             },
             _,
           )
@@ -52,7 +70,7 @@ module AuthPage = {
        | None =>
          <>
            <h1> "Login With DirectAuth"->React.string </h1>
-           <button onClick> "Google Login"->React.string </button>
+           <button onClick> "Passwordless Login"->React.string </button>
          </>
        | Some((ethAddress, privateKey)) =>
          <LoggedInPage privateKey ethAddress />

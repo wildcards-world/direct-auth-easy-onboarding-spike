@@ -30,6 +30,7 @@
     "graphql-tag": "^2.10.3",
     "isomorphic-fetch": "^2.2.1",
     "serbet": "^0.4.0",
-    "subscriptions-transport-ws": "^0.9.16"
+    "subscriptions-transport-ws": "^0.9.16",
+    "web3": "^1.2.11"
   }
 }

@@ -31,12 +31,19 @@ function App$AuthPage(Props) {
   var yourEthAddress = match[0];
   var onClick = function (param) {
     var __x = torusObj.triggerLogin({
-          name: "Google",
-          typeOfLogin: "google",
-          clientId: "221898609709-obfn3p63741l5333093430j3qeiinaa8.apps.googleusercontent.com",
-          verifier: "google-lrc"
+          name: "Hosted Email Passwordless",
+          typeOfLogin: "jwt",
+          clientId: "P7PJuBCXIHP41lcyty0NEb7Lgf7Zme8Q",
+          verifier: "torus-auth0-passwordless",
+          jwtParams: {
+            domain: "https://torus-test.auth0.com",
+            verifierIdField: "name",
+            connection: "",
+            isVerifierIdCaseSensitive: false
+          }
         });
     __x.then(function (loginObj) {
+          console.log("THE LOGIN OBJECT", loginObj);
           return Promise.resolve(Curry._1(setYourEthAddress, (function (param) {
                             return [
                                     loginObj.publicAddress,
@@ -51,7 +58,7 @@ function App$AuthPage(Props) {
                     ethAddress: yourEthAddress[0]
                   }) : React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, "Login With DirectAuth"), React.createElement("button", {
                         onClick: onClick
-                      }, "Google Login")));
+                      }, "Passwordless Login")));
 }
 
 var AuthPage = {
