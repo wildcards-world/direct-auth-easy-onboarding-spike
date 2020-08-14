@@ -1,0 +1,246 @@
+@import "./defaults";
+
+body {
+  /* background-color: #ff875c; */
+  background-color: $blue-gradient-dark; /* fallback for old browsers */
+  background-color: -webkit-linear-gradient(
+    to right,
+    $blue-gradient-light,
+    $blue-gradient-dark
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background-color: linear-gradient(
+    to right,
+    $blue-gradient-light,
+    $blue-gradient-dark
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: $primary-blue;
+  padding: 0;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-image: url("/assets/bridge-silhouette-blue.png");
+  background-size: 100% auto;
+  background-position: bottom right;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.app {
+  height: calc(100vh - 80px);
+  width: calc(100vw - 80px);
+  padding: 20px;
+  margin: 20px;
+  border: 2px solid $white;
+  border-radius: 4px;
+}
+
+.login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% - 2rem), calc(-50% - 2rem));
+  width: 90%;
+  margin: 2rem;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.login-button {
+  background-color: $dark-color;
+  color: $white;
+  border: none;
+  font-size: 20px;
+  padding: 1rem;
+  border-radius: 1rem;
+  outline: none;
+}
+
+button:hover {
+  opacity: 0.6;
+}
+
+.login-button > img {
+  height: 20px;
+  margin: 0 4px;
+  transform: translateY(3px);
+}
+
+.logout {
+  position: absolute;
+  right: 40px;
+}
+
+.menu {
+  position: absolute;
+  right: 40px;
+  z-index: 20;
+}
+
+.funnel-step-container {
+  select,
+  input {
+    padding: 1rem;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+
+  input {
+    width: calc(100% - calc(2rem + 2px));
+  }
+  select {
+    width: 100%;
+  }
+}
+
+.login-container,
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.joint-logo {
+  width: 400px;
+}
+
+.menu {
+  // background-color: #ffffff55;
+  background-color: $dark-color;
+  border-radius: 3px;
+  .menu-inner {
+    border-radius: 3px;
+    border: 1px solid $white;
+    padding: 0.2rem;
+    margin: 0.2rem;
+    font-size: 16px;
+    button {
+      display: block;
+      margin-left: auto;
+      img {
+        height: 24px;
+      }
+    }
+    ul {
+      min-width: 140px;
+      padding: 1rem 0.4rem 0.4rem 0.4rem;
+      list-style-type: none;
+      margin: 0;
+      text-decoration: none;
+      text-transform: uppercase;
+      & :hover {
+        opacity: 0.8;
+      }
+    }
+    li {
+      font-family: "Nunito", sans-serif;
+      font-weight: bold;
+      text-decoration: none;
+      color: $white;
+    }
+    .menu-item-with-icon {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      img {
+        display: block;
+        height: 16px;
+      }
+    }
+  }
+}
+
+a {
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: $white;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-color: $white;
+}
+
+#about {
+  font-size: 2rem;
+  h1 {
+    margin: 0;
+  }
+  p {
+    color: lighten($primary-blue, 20%);
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: $blue-gradient-dark; /* fallback for old browsers */
+  background-color: -webkit-linear-gradient(
+    to left,
+    $blue-gradient-dark,
+    $blue-gradient-light
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background-color: linear-gradient(
+    to left,
+    $blue-gradient-dark,
+    $blue-gradient-light
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+th {
+  font-family: "Nunito", sans-serif;
+  background: $dark-color;
+  color: $white;
+  font-weight: bold;
+}
+td,
+th {
+  border: 1.4px solid $white;
+  padding: 8px;
+  padding: 10px;
+  text-align: left;
+}
+#bridges tr {
+  cursor: pointer;
+  &:hover {
+    color: $white;
+  }
+}
+tr:nth-of-type(odd) {
+  background: rgba($white, 0.05);
+}
+
+.heading-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.secondary-button {
+  background-color: $dark-color;
+  color: $white;
+  border: none;
+  font-size: 20px;
+  padding: 0.2rem 1rem;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  border-radius: 10px;
+  outline: none;
+}
+
+.bridge-action {
+  background-color: $dark-color;
+  border: 1px solid $white;
+  border-radius: 2px;
+  margin-right: 2px;
+}
+
+.profile-menu {
+  height: 2rem;
+  transform: translateY(25%);
+}

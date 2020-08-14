@@ -5,6 +5,7 @@ import * as React from "react";
 import * as Client from "./gql-client/Client.bs.js";
 import * as DirectAuth from "./DirectAuth.bs.js";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
+import * as AdminOverview from "./AdminOverview.bs.js";
 import * as Client$1 from "@apollo/client";
 
 function App$LoggedInPage(Props) {
@@ -70,7 +71,6 @@ function App(Props) {
         
       });
   var setTorusInstance = match[1];
-  var torusInstance = match[0];
   React.useEffect((function () {
           var __x = DirectAuth.createTorusSdk(undefined);
           __x.then(function (torusInstance) {
@@ -82,9 +82,7 @@ function App(Props) {
         }), []);
   return React.createElement(Client$1.ApolloProvider, {
               client: Client.instance,
-              children: torusInstance !== undefined ? React.createElement(App$AuthPage, {
-                      torusObj: Caml_option.valFromOption(torusInstance)
-                    }) : React.createElement("h1", undefined, "Loading")
+              children: React.createElement(AdminOverview.make, {})
             });
 }
 

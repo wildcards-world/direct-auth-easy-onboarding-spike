@@ -1,0 +1,108 @@
+@import "./defaults";
+
+.funnel-step-container {
+  font-family: "Nunito", sans-serif;
+  width: 500px;
+  max-width: calc(
+    100% - 5rem
+  ); //( 100% - 2rem (left padding) - 2rem (right padding) - 1rem (left margin))
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin: 1rem auto;
+  border: 2px solid $white;
+  border-radius: 4px;
+  background-color: $blue-gradient-dark; /* fallback for old browsers */
+  background-color: -webkit-linear-gradient(
+    to left,
+    $blue-gradient-dark,
+    $blue-gradient-light
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background-color: linear-gradient(
+    to left,
+    $blue-gradient-dark,
+    $blue-gradient-light
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  @media (min-width: $breakpoint-tablet) {
+    min-width: 300px;
+  }
+  h2 {
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    color: $white;
+    margin-top: 0;
+  }
+  h4 {
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    color: $primary-blue;
+    margin: 0 0 0.3rem 0;
+  }
+  .prev-next-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    button {
+      color: $white;
+      padding: 0.6rem;
+      text-transform: uppercase;
+      font-family: "Nunito", sans-serif;
+      font-weight: bold;
+      font-size: 12px;
+      background-color: $dark-color;
+      border-radius: 5px;
+    }
+  }
+  .confirm-bridge-button {
+    color: $white;
+    padding: 0.6rem;
+    text-transform: uppercase;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: $dark-color;
+    border-radius: 5px;
+  }
+}
+
+.overview {
+  h4 {
+    color: $white;
+    margin: 5px 0;
+  }
+
+  p {
+    color: lighten($primary-blue, 10%);
+    margin: 2px 0;
+  }
+}
+
+.full-width-button {
+  color: $white;
+  width: 100%;
+  margin: 2rem 0 0 0;
+  padding: 0.4rem;
+  text-transform: uppercase;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: $dark-color;
+  border-radius: 5px;
+}
+
+.input-with-button {
+  position: relative;
+  .input-add-button {
+    position: absolute;
+    color: $dark-color;
+    border-radius: 2px;
+    border: 1px solid $dark-color;
+    right: 0.7rem;
+    top: 0.7rem;
+    font-size: 1.4rem;
+    &:hover {
+      background-color: $dark-color;
+      color: $white;
+    }
+  }
+}

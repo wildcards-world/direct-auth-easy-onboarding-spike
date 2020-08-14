@@ -94,9 +94,9 @@ let make = () => {
     None;
   });
   <ApolloClient.React.ApolloProvider client=Client.instance>
-    {switch (torusInstance) {
-     | None => <h1> "Loading"->React.string </h1>
-     | Some(torusObj) => <AuthPage torusObj />
-     }}
-  </ApolloClient.React.ApolloProvider>;
+    // {switch (torusInstance) {
+    //  | None => <h1> "Loading"->React.string </h1>
+    //  | Some(torusObj) => <AuthPage torusObj />
+    //  }}
+     <AdminOverview /> </ApolloClient.React.ApolloProvider>;
 };
