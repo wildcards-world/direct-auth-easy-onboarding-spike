@@ -5,7 +5,6 @@ import * as React from "react";
 import * as Client from "./gql-client/Client.bs.js";
 import * as DirectAuth from "./DirectAuth.bs.js";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
-import * as AdminOverview from "./AdminOverview.bs.js";
 import * as Client$1 from "@apollo/client";
 
 function App$LoggedInPage(Props) {
@@ -34,10 +33,10 @@ function App$AuthPage(Props) {
     var __x = torusObj.triggerLogin({
           name: "Hosted Email Passwordless",
           typeOfLogin: "jwt",
-          clientId: "P7PJuBCXIHP41lcyty0NEb7Lgf7Zme8Q",
-          verifier: "torus-auth0-passwordless",
+          clientId: "VolHqir3FLzGjvtgtgJJ1H25vHGj9uMq",
+          verifier: "wildcards-auth0-passwordless",
           jwtParams: {
-            domain: "https://torus-test.auth0.com",
+            domain: "https://jasoons.eu.auth0.com",
             verifierIdField: "name",
             connection: "",
             isVerifierIdCaseSensitive: false
@@ -71,6 +70,7 @@ function App(Props) {
         
       });
   var setTorusInstance = match[1];
+  var torusInstance = match[0];
   React.useEffect((function () {
           var __x = DirectAuth.createTorusSdk(undefined);
           __x.then(function (torusInstance) {
@@ -82,7 +82,9 @@ function App(Props) {
         }), []);
   return React.createElement(Client$1.ApolloProvider, {
               client: Client.instance,
-              children: React.createElement(AdminOverview.make, {})
+              children: torusInstance !== undefined ? React.createElement(App$AuthPage, {
+                      torusObj: Caml_option.valFromOption(torusInstance)
+                    }) : React.createElement("h1", undefined, "Loading")
             });
 }
 

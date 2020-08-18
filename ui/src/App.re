@@ -30,14 +30,14 @@ module AuthPage = {
           {
             name: "Hosted Email Passwordless",
             typeOfLogin: "jwt",
-            // clientId: "VolHqir3FLzGjvtgtgJJ1H25vHGj9uMq",
-            clientId: "P7PJuBCXIHP41lcyty0NEb7Lgf7Zme8Q",
+            clientId: "VolHqir3FLzGjvtgtgJJ1H25vHGj9uMq",
+            // clientId: "P7PJuBCXIHP41lcyty0NEb7Lgf7Zme8Q",
             // clientId: "lXlMA51Cpf63nU7IOA4kbCYR7E0a3cIB",
-            verifier: "torus-auth0-passwordless",
+            verifier: "wildcards-auth0-passwordless",
             jwtParams:
               Some({
-                // domain: "https://jasoons.eu.auth0.com",
-                domain: "https://torus-test.auth0.com",
+                domain: "https://jasoons.eu.auth0.com",
+                // domain: "https://torus-test.auth0.com",
                 // domain: "https://dev-q6kst0rx.eu.auth0.com",
                 verifierIdField: "name",
                 connection: "",
@@ -94,9 +94,10 @@ let make = () => {
     None;
   });
   <ApolloClient.React.ApolloProvider client=Client.instance>
-    // {switch (torusInstance) {
-    //  | None => <h1> "Loading"->React.string </h1>
-    //  | Some(torusObj) => <AuthPage torusObj />
-    //  }}
-     <AdminOverview /> </ApolloClient.React.ApolloProvider>;
+    {switch (torusInstance) {
+     | None => <h1> "Loading"->React.string </h1>
+     | Some(torusObj) => <AuthPage torusObj />
+     }}
+  </ApolloClient.React.ApolloProvider>;
+  //  <AdminOverview />
 };
